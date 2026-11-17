@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold text-slate-900;
+  }
+}
+
+@layer components {
+  /* Reusable card base */
+  .jc-card {
+    @apply bg-white rounded-xl border border-slate-200/80 shadow-subtle transition-all duration-200;
+  }
+
+  .jc-card-hover {
+    @apply hover:shadow-elevated hover:border-brand-300;
+  }
+
+  /* Reusable input base */
+  .jc-input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all;
+  }
+
+  /* Reusable button base */
+  .jc-btn {
+    @apply inline-flex items-center justify-center font-medium rounded-lg text-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .jc-btn-primary {
+    @apply jc-btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 focus:ring-brand-500 shadow-sm;
+  }
+
+  .jc-btn-secondary {
+    @apply jc-btn bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:bg-slate-100 focus:ring-slate-400 shadow-sm;
+  }
+
+  .jc-btn-outline {
+    @apply jc-btn bg-transparent text-brand-600 border border-brand-600 hover:bg-brand-50 active:bg-brand-100 focus:ring-brand-500;
+  }
+
+  .jc-btn-ghost {
+    @apply jc-btn bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-300;
+  }
+}

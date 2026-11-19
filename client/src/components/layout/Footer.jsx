@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, Github, Linkedin, Twitter } from 'lucide-react';
 
@@ -88,14 +88,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} JobConnect. Built for developer portfolio demonstration.</p>
-          <div className="flex items-center gap-6">
-            <span>React + Vite</span>
-            <span>•</span>
-            <span>Tailwind CSS</span>
-            <span>•</span>
-            <span>Express & Node.js</span>
-          </div>
+          <p>Â© {new Date().getFullYear()} JobConnect. Built for developer portfolio demonstration.</p>
         </div>
       </div>
     </footer>

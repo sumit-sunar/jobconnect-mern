@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+﻿import mongoose from 'mongoose';
 import Job from '../models/Job.js';
 import asyncHandler from '../middleware/asyncHandler.js';
 
@@ -185,7 +185,7 @@ export const updateJob = asyncHandler(async (req, res) => {
     });
   }
 
-  if (job.postedBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+  if (job.postedBy?.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
     return res.status(403).json({
       status: 'fail',
       message: 'Not authorized to update this job listing',
@@ -222,7 +222,7 @@ export const deleteJob = asyncHandler(async (req, res) => {
     });
   }
 
-  if (job.postedBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+  if (job.postedBy?.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
     return res.status(403).json({
       status: 'fail',
       message: 'Not authorized to delete this job listing',

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+﻿import mongoose from 'mongoose';
 import Application from '../models/Application.js';
 import Job from '../models/Job.js';
 import asyncHandler from '../middleware/asyncHandler.js';
@@ -30,7 +30,7 @@ export const applyToJob = asyncHandler(async (req, res) => {
     });
   }
 
-  if (job.postedBy.toString() === req.user._id.toString()) {
+  if (job.postedBy?.toString() === req.user._id.toString()) {
     return res.status(400).json({
       status: 'fail',
       message: 'You cannot apply to your own job posting',
@@ -107,7 +107,7 @@ export const getApplicationsForJob = asyncHandler(async (req, res) => {
     });
   }
 
-  if (job.postedBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+  if (job.postedBy?.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
     return res.status(403).json({
       status: 'fail',
       message: 'Not authorized to view applications for this job',
@@ -152,7 +152,7 @@ export const updateApplicationStatus = asyncHandler(async (req, res) => {
   }
 
   if (
-    application.job.postedBy.toString() !== req.user._id.toString() &&
+    application.job.postedBy?.toString() !== req.user._id.toString() &&
     req.user.role !== 'admin'
   ) {
     return res.status(403).json({
@@ -192,7 +192,7 @@ export const withdrawApplication = asyncHandler(async (req, res) => {
     });
   }
 
-  if (application.applicant.toString() !== req.user._id.toString()) {
+  if (application.applicant?.toString() !== req.user._id.toString()) {
     return res.status(403).json({
       status: 'fail',
       message: 'Not authorized to withdraw this application',

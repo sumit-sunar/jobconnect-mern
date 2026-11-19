@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, DollarSign, Clock, ArrowRight, Building2 } from 'lucide-react';
 import Badge from '../ui/Badge';
@@ -27,20 +27,24 @@ export default function JobCard({ job }) {
     }
   };
 
-  // Format salary range
+  // Format salary — handles {min,max,currency} object or flat salaryMin/salaryMax fields
   const formatSalary = () => {
-    if (job.salary) return job.salary;
-    const { salaryMin, salaryMax } = job;
-    if (!salaryMin && !salaryMax) return null;
-
     const fmt = (num) => (num >= 1000 ? `$${Math.round(num / 1000)}k` : `$${num.toLocaleString()}`);
 
-    if (salaryMin && salaryMax) {
-      return `${fmt(salaryMin)} – ${fmt(salaryMax)}`;
+    if (job.salary && typeof job.salary === 'object') {
+      const { min, max } = job.salary;
+      if (min && max) return `${fmt(min)} – ${fmt(max)}`;
+      if (min) return `From ${fmt(min)}`;
+      if (max) return `Up to ${fmt(max)}`;
+      return null;
     }
-    if (salaryMin) {
-      return `From ${fmt(salaryMin)}`;
-    }
+
+    if (typeof job.salary === 'string') return job.salary;
+
+    const { salaryMin, salaryMax } = job;
+    if (!salaryMin && !salaryMax) return null;
+    if (salaryMin && salaryMax) return `${fmt(salaryMin)} – ${fmt(salaryMax)}`;
+    if (salaryMin) return `From ${fmt(salaryMin)}`;
     return `Up to ${fmt(salaryMax)}`;
   };
 

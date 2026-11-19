@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -135,13 +135,20 @@ export default function JobDetailsPage() {
     }, 4000);
   };
 
-  // Salary format helper
+  // Salary format helper — handles {min,max,currency} object or flat salaryMin/salaryMax
   const formatSalary = () => {
     if (!job) return null;
-    if (job.salary) return job.salary;
+    const fmt = (num) => (num >= 1000 ? `$${Math.round(num / 1000)}k` : `$${num.toLocaleString()}`);
+    if (job.salary && typeof job.salary === 'object') {
+      const { min, max } = job.salary;
+      if (min && max) return `${fmt(min)} – ${fmt(max)}`;
+      if (min) return `From ${fmt(min)}`;
+      if (max) return `Up to ${fmt(max)}`;
+      return null;
+    }
+    if (typeof job.salary === 'string') return job.salary;
     const { salaryMin, salaryMax } = job;
     if (!salaryMin && !salaryMax) return null;
-    const fmt = (num) => (num >= 1000 ? `$${Math.round(num / 1000)}k` : `$${num.toLocaleString()}`);
     if (salaryMin && salaryMax) return `${fmt(salaryMin)} – ${fmt(salaryMax)}`;
     if (salaryMin) return `From ${fmt(salaryMin)}`;
     return `Up to ${fmt(salaryMax)}`;
